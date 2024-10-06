@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Touch Event Injector</title>
+    <script>
+        function triggerTouchEvent() {
+            // Create a touch point
+            const touchObj = new Touch({
+                identifier: Date.now(),
+                target: document.body,
+                clientX: window.innerWidth / 2, // Touch at the center
+                clientY: window.innerHeight / 2,
+                radiusX: 2.5,
+                radiusY: 2.5,
+                rotationAngle: 10,
+                force: 1
+            });
+
+            // Create a touch event
+            const touchEvent = new TouchEvent('touchstart', {
+                cancelable: true,
+                bubbles: true,
+                touches: [touchObj],
+                targetTouches: [touchObj],
+                changedTouches: [touchObj]
+            });
+
+            // Dispatch the touch event
+            document.body.dispatchEvent(touchEvent);
+        }
+
+        window.onload = function() {
+            // Trigger the touch event once the page is loaded
+            triggerTouchEvent();
+        }
+    </script>
+</head>
+<body>
+    <h1>Touch Event Injector</h1>
+</body>
+</html>
